@@ -3,39 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Fact Generator</title>
+  <title>Random Fact & Message Generator</title>
   <link rel="stylesheet" href="styles.css">
   <!-- Font Awesome for Social Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <div class="container">
-    <h1>Random Fact Generator</h1>
-    <div class="category-selector">
-      <label for="category">Select a Category:</label>
-      <select id="category">
-        <option value="science">Science</option>
-        <option value="history">History</option>
-        <option value="animals">Animals</option>
-        <option value="technology">Technology</option>
-        <option value="random">Random</option>
-      </select>
+    <h1>Random Fact & Message Generator</h1>
+
+    <!-- Fact Generator Section -->
+    <div class="section">
+      <h2>Random Fact Generator</h2>
+      <div class="category-selector">
+        <label for="category">Select a Category:</label>
+        <select id="category">
+          <option value="science">Science</option>
+          <option value="history">History</option>
+          <option value="animals">Animals</option>
+          <option value="technology">Technology</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+      <button id="get-fact">Get Random Fact</button>
+      <div id="fact-display" class="hidden">
+        <img id="fact-image" src="https://via.placeholder.com/400x200" alt="Fact Image">
+        <p id="fact-text"></p>
+        <a id="fact-link" href="#" target="_blank">Learn More</a>
+        <div class="social-share">
+          <button id="share-twitter" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </button>
+          <button id="share-facebook" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button id="share-whatsapp" class="social-icon">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+          <button id="listen-fact" class="social-icon">
+            <i class="fas fa-volume-up"></i>
+          </button>
+        </div>
+      </div>
     </div>
-    <button id="get-fact">Get Random Fact</button>
-    <div id="fact-display" class="hidden">
-      <img id="fact-image" src="https://via.placeholder.com/400x200" alt="Fact Image">
-      <p id="fact-text"></p>
-      <a id="fact-link" href="#" target="_blank">Learn More</a>
-      <div class="social-share">
-        <button id="share-twitter" class="social-icon">
-          <i class="fab fa-twitter"></i>
-        </button>
-        <button id="share-facebook" class="social-icon">
-          <i class="fab fa-facebook-f"></i>
-        </button>
-        <button id="share-whatsapp" class="social-icon">
-          <i class="fab fa-whatsapp"></i>
-        </button>
+
+    <!-- Message Generator Section -->
+    <div class="section">
+      <h2>Message Generator</h2>
+      <div class="category-selector">
+        <label for="message-category">Select a Category:</label>
+        <select id="message-category">
+          <option value="motivational">Motivational</option>
+          <option value="funny">Funny</option>
+          <option value="romantic">Romantic</option>
+          <option value="inspirational">Inspirational</option>
+          <option value="friendship">Friendship</option>
+        </select>
+      </div>
+      <button id="get-message">Get Random Message</button>
+      <div id="message-display" class="hidden">
+        <img id="message-image" src="https://via.placeholder.com/400x200" alt="Message Image">
+        <p id="message-text"></p>
+        <div class="social-share">
+          <button id="share-twitter-message" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </button>
+          <button id="share-facebook-message" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button id="share-whatsapp-message" class="social-icon">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+          <button id="listen-message" class="social-icon">
+            <i class="fas fa-volume-up"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
