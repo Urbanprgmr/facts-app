@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Fact Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Random Fact Generator</h1>
+    <div class="category-selector">
+      <label for="category">Select a Category:</label>
+      <select id="category">
+        <option value="trivia">Trivia</option>
+        <option value="math">Math</option>
+        <option value="date">Date</option>
+        <option value="year">Year</option>
+      </select>
+    </div>
+    <button id="get-fact">Get Random Fact</button>
+    <div id="fact-display" class="hidden">
+      <img id="fact-image" src="https://via.placeholder.com/400x200" alt="Fact Image">
+      <p id="fact-text"></p>
+      <a id="fact-link" href="#" target="_blank">Learn More</a>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
