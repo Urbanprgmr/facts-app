@@ -2,25 +2,14 @@ const UNSPLASH_API_KEY = "CVXmjr7EWKDOvC9lVoKibLMfH129Yzxp_v0Qd4bgGDM"; // Repla
 
 document.getElementById("get-fact").addEventListener("click", async () => {
   const category = document.getElementById("category").value;
-  let apiUrl;
-  let factText;
 
   try {
-    if (["trivia", "math", "date", "year"].includes(category)) {
-      // Use Numbers API for trivia, math, date, and year
-      apiUrl = `http://numbersapi.com/random/${category}?json`;
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      factText = data.text;
-    } else {
-      // Use Useless Facts API for other categories
-      apiUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      factText = data.text;
-    }
+    // Fetch fact from Useless Facts API
+    const response = await fetch("https://uselessfacts.jsph.pl/random.json?language=en");
+    const data = await response.json();
+    const factText = data.text;
 
-    // Fetch related image from Unsplash
+    // Fetch related image from Unsplash based on the fact's content
     const unsplashResponse = await fetch(
       `https://api.unsplash.com/photos/random?query=${category}&client_id=${UNSPLASH_API_KEY}`
     );
