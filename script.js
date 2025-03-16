@@ -9,9 +9,12 @@ document.getElementById("get-fact").addEventListener("click", async () => {
     const data = await response.json();
     const factText = data.text;
 
-    // Fetch related image from Unsplash based on the fact's content
+    // Extract keywords from the fact text
+    const keywords = extractKeywords(factText);
+
+    // Fetch related image from Unsplash based on keywords
     const unsplashResponse = await fetch(
-      `https://api.unsplash.com/photos/random?query=${category}&client_id=${UNSPLASH_API_KEY}`
+      `https://api.unsplash.com/photos/random?query=${keywords[0]}&client_id=${UNSPLASH_API_KEY}`
     );
     const unsplashData = await unsplashResponse.json();
     const imageUrl = unsplashData.urls.regular;
@@ -19,7 +22,7 @@ document.getElementById("get-fact").addEventListener("click", async () => {
     // Display fact and image
     document.getElementById("fact-text").textContent = factText;
     document.getElementById("fact-image").src = imageUrl;
-    document.getElementById("fact-link").href = `https://en.wikipedia.org/wiki/${category}`;
+    document.getElementById("fact-link").href = `https://en.wikipedia.org/wiki/${keywords[0]}`;
     document.getElementById("fact-display").classList.add("visible");
 
     // Set up social sharing
@@ -30,6 +33,18 @@ document.getElementById("get-fact").addEventListener("click", async () => {
     document.getElementById("fact-display").classList.add("visible");
   }
 });
+
+// Extract keywords from the fact text
+function extractKeywords(text) {
+  // Remove common stopwords and extract meaningful keywords
+  const stopwords = ["the", "a", "an", "in", "on", "at", "for", "of", "and", "or", "is", "are", "was", "were"];
+  const words = text
+    .toLowerCase()
+    .replace(/[^a-zA-Z\s]/g, "")
+    .split(" ")
+    .filter((word) => !stopwords.includes(word) && word.length > 3);
+  return words;
+}
 
 // Social sharing setup
 function setupSocialSharing(factText, imageUrl) {
