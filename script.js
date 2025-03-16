@@ -3,41 +3,22 @@ const UNSPLASH_API_KEY = "CVXmjr7EWKDOvC9lVoKibLMfH129Yzxp_v0Qd4bgGDM"; // Repla
 document.getElementById("get-fact").addEventListener("click", async () => {
   const category = document.getElementById("category").value;
   let apiUrl;
-
-  // Set API URL based on category
-  switch (category) {
-    case "trivia":
-      apiUrl = "http://numbersapi.com/random/trivia?json";
-      break;
-    case "math":
-      apiUrl = "http://numbersapi.com/random/math?json";
-      break;
-    case "date":
-      apiUrl = "http://numbersapi.com/random/date?json";
-      break;
-    case "year":
-      apiUrl = "http://numbersapi.com/random/year?json";
-      break;
-    case "science":
-      apiUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
-      break;
-    case "history":
-      apiUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
-      break;
-    case "animals":
-      apiUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
-      break;
-    default:
-      apiUrl = "http://numbersapi.com/random/trivia?json";
-  }
+  let factText;
 
   try {
-    // Fetch fact from API
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    // Extract fact text
-    const factText = data.text || data.text; // Adjust based on API response
+    if (["trivia", "math", "date", "year"].includes(category)) {
+      // Use Numbers API for trivia, math, date, and year
+      apiUrl = `http://numbersapi.com/random/${category}?json`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      factText = data.text;
+    } else {
+      // Use Useless Facts API for other categories
+      apiUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      factText = data.text;
+    }
 
     // Fetch related image from Unsplash
     const unsplashResponse = await fetch(
@@ -49,7 +30,7 @@ document.getElementById("get-fact").addEventListener("click", async () => {
     // Display fact and image
     document.getElementById("fact-text").textContent = factText;
     document.getElementById("fact-image").src = imageUrl;
-    document.getElementById("fact-link").href = `https://en.wikipedia.org/wiki/${data.number || category}`;
+    document.getElementById("fact-link").href = `https://en.wikipedia.org/wiki/${category}`;
     document.getElementById("fact-display").classList.add("visible");
 
     // Set up social sharing
